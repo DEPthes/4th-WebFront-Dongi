@@ -1,0 +1,177 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #f6f6f6;
+}
+
+.container{
+    display:flex;
+    flex-flow: row wrap;
+    gap: 50px; 
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.phone-preview ,
+.login {
+    flex: 1 1 500px; 
+/*  flex-grow: 1;  남는 공간 있을 때 비율 1
+    flex-shrink: 1;공간 부족할 때 비율 1
+    flex-basis: 500px; 기본 크기  */
+    max-width: 50%; 
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+    max-width: 420px;
+}
+
+.phone-preview__img{
+    width: 100%;     
+    height: auto;    
+    max-width: 520px;
+    align-items: center;
+    padding: 1px 5px 5px 5px;
+}
+
+
+
+.login__div--content{
+    background: #FFFFFF;
+    border:solid 1px #CCCCCC;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 416px;
+
+}
+  
+.login__logo{
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.login__form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.login__input-group{
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    border:solid 1px #B2B2B2;
+    background: white;
+    gap: 8px;
+    padding: 0 16px;
+    height: 50px;               
+    width: 100%;
+    max-width: 320px;           
+}
+
+
+.login__input-group img{
+    width: 20px;
+    height: 20px;
+    margin: 12px;
+
+}
+
+.login__input-group input{
+    border: none;
+    color: #7F7F7F;
+    flex: 1;
+    font-size: 16px;
+    outline:none;
+    background: transparent;
+    height: 100%;
+}
+
+
+.login__button,
+.login__div{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+
+.login__button{
+    background: #B2DDFF;
+    border-radius: 30px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    height: 44px;
+    font-size: 16px;
+    justify-content: center;
+    
+}
+
+.login__div{
+    color: #7f7f7f;
+}
+
+
+.login__button--kakao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background: #f8d706;
+    color: #2f1b1a;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.login__div--password{
+    cursor: pointer;
+}
+
+.login__join{
+    margin-top: 10px;
+    background: #ffffff;
+    color:#7f7f7f;
+    border:solid 1px #CCCCCC;
+    padding: 31px 111px;
+
+}
+.login__link{
+    text-decoration: none;
+    color: #2E90FA;
+}
+
+.login__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.login__footer--text {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #7F7F7F;
+}
+
+.login__footer-icon {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    justify-content: center;
+}
