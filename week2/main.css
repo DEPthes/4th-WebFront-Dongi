@@ -81,7 +81,6 @@ body{
     width: 20px;
     height: 20px;
     margin: 12px;
-
 }
 
 .login__input-group input{
@@ -155,7 +154,8 @@ body{
 
 .login__footer-icons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);   /*두 개열 각 열이 같은 너비 1fraction씩씩 */
     gap: 8px;
     justify-content: center;
+    cursor: pointer;
 }
