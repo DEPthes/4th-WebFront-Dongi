@@ -37,10 +37,7 @@ body{
     height: auto;    
     max-width: 520px;
     align-items: center;
-    padding: 1px 5px 5px 5px;
 }
-
-
 
 .login__div--content{
     background: #FFFFFF;
@@ -51,7 +48,6 @@ body{
     padding: 32px 24px;
     width: 100%;
     max-width: 416px;
-
 }
   
 .login__logo{
@@ -81,7 +77,6 @@ body{
     max-width: 320px;           
 }
 
-
 .login__input-group img{
     width: 20px;
     height: 20px;
@@ -99,16 +94,10 @@ body{
     height: 100%;
 }
 
-
-.login__button,
-.login__div{
+.login__button{
     display: flex;
     flex-direction: column;
     align-items: center; 
-}
-
-
-.login__button{
     background: #B2DDFF;
     border-radius: 30px;
     color: #ffffff;
@@ -118,19 +107,14 @@ body{
     max-width: 320px;
     height: 44px;
     font-size: 16px;
-    justify-content: center;
-    
+    justify-content: center;  
 }
 
 .login__div{
     color: #7f7f7f;
 }
 
-
 .login__button--kakao{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: row;
     background: #f8d706;
     color: #2f1b1a;
@@ -169,7 +153,7 @@ body{
     color: #7F7F7F;
 }
 
-.login__footer-icon {
+.login__footer-icons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
