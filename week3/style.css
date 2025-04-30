@@ -1,0 +1,51 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: #fff;
+}
+
+.container{
+    border: solid 3px darkgray;
+    width: 80%;
+    
+
+}
+.container-display{
+    border: solid 1px darkgray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-top{
+    display: flex;
+    justify-content: center;
+}
+
+.button-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.btn-equal{
+    width:100%;
+    background: blue;
+}
+
+.btn-number{
+    color: black;
+}
+
+.btn-operator{
+    color:white;
+    background: black;
+}
+
+.btn-clear{
+    color: white;
+    background: red;
+}
