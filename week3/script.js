@@ -14,7 +14,7 @@ let previousValue, selectedOperator, currentValue, result;
 let isOperatorClicked = false; 
 
 
-number.forEach(btn => { 
+number.forEach(btn => {     //"0으로 나눌수없음"에 대해서도
     btn.addEventListener("click", () => {
         if (display.textContent === "0" || isOperatorClicked){
             display.textContent= btn.textContent;
@@ -57,10 +57,13 @@ const curr = Number(currentValue);
             result = prev * curr;
             break;
         case "%":
-            result = prev / curr; 
+            if (curr ===0){
+                result = "0으로 나눌 수 없습니다"
+            } else{
+                result = prev / curr; 
+            }
             break;                 
     }
-
 
     display.textContent = result;
     expression.textContent =`${previousValue} ${selectedOperator} ${currentValue}`;  
