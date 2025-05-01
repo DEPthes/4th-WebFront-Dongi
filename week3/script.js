@@ -26,7 +26,7 @@ number.forEach(btn => {
 });
 
 decimal.addEventListener("click", ()=> {
-    display.textContent.includes(".") ? display.textContent = display.textContent : display.textContent += decimal.textContent;
+    display.textContent.includes(".") ? display.textContent = display.textContent : display.textContent +=".";
 });
 
 operator.forEach(btn => { 
@@ -34,6 +34,8 @@ operator.forEach(btn => {
         previousValue = display.textContent;
         selectedOperator = btn.textContent; 
         isOperatorClicked = true;      
+
+        expression.textContent = `${previousValue} ${selectedOperator}`;
     });
 });
 
