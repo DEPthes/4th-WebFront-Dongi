@@ -14,9 +14,9 @@ let previousValue, selectedOperator, currentValue, result;
 let isOperatorClicked = false; 
 
 
-number.forEach(btn => {     //"0으로 나눌수없음"에 대해서도
+number.forEach(btn => {     
     btn.addEventListener("click", () => {
-        if (display.textContent === "0" || isOperatorClicked){
+        if (display.textContent === "0" || display.textContent === "0으로 나눌 수 없습니다" || isOperatorClicked){
             display.textContent= btn.textContent;
             isOperatorClicked =  false;
         } else{
