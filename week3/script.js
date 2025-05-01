@@ -1,9 +1,5 @@
 const display = document.getElementById('display');
 const number = document.querySelectorAll('.btn-number');
-const division = document.getElementById('operator-div');
-const mutiply = document.getElementById('operator-mul');
-const subtract = document.getElementById('operator-sub');
-const add = document.getElementById('operator-add');
 const equal = document.querySelector('.btn-equal');
 const expression = document.getElementById('expression');
 const clearAll = document.querySelector('.btn-clear');
@@ -12,7 +8,6 @@ const operator = document.querySelectorAll('.btn-operator');
 
 let previousValue, selectedOperator, currentValue, result;
 let isOperatorClicked = false; 
-
 
 number.forEach(btn => {     
     btn.addEventListener("click", () => {
@@ -38,7 +33,6 @@ operator.forEach(btn => {
         expression.textContent = `${previousValue} ${selectedOperator}`;
     });
 });
-
 
 equal.addEventListener("click", () => {
     currentValue = display.textContent; 
@@ -68,7 +62,6 @@ const curr = Number(currentValue);
     display.textContent = result;
     expression.textContent =`${previousValue} ${selectedOperator} ${currentValue}`;  
 }); 
-
 
 clearAll.addEventListener("click", () => {
     previousValue = null;
