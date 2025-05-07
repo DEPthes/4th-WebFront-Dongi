@@ -10,16 +10,16 @@
     <div class="container">
         <h1 class="todo-header">오늘의 할일</h1>
         <form class="todo-form">
-            <input class="todo-input" type="text" placeholder="할 일을 입력하세요">
-            <button class="todo-add-btn" type="submit">추가</button>
+            <input class="todo-input" id="input-todo" type="text" placeholder="할 일을 입력하세요">
+            <button class="todo-add-btn" id="add-btn" type="submit">추가</button>
         </form>
-        <ul class="todo-list">
+        <ul class="todo-list" id="todo-list">
             <li class="todo-item">
-                <input class="todo-checkbox" type="checkbox">
-                <button class="todo-delete-btn">❌</button>
+                <input class="todo-checkbox" id="checkbox" type="checkbox">
+                <button class="todo-delete-btn" id="delete-btn">❌</button>
             </li>  
         </ul>
-        <div class="todo-count">개 항목 남음</div>
+        <div class="todo-count" id="count-remaining">개 항목 남음</div>
     </div>
     <script src="script.js"></script>
 </body>
