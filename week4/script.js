@@ -3,34 +3,62 @@ const addBtn = document.getElementById('add-btn');
 const todoList = document.getElementById('todo-list');
 const countItem = document.getElementById('count-remaining');
 
+let todoLists = [];
 
-const todoLists = [];
-
-
-function handleAddBtnClick(e){
-    e.preventDefault();
-
-    todoLists.push(input.value);
+function renderTodoList(){
     todoList.innerHTML = "";
 
-    todoLists.map((item,index)=> {
-        const li = document.createElement('li');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = "❌";
-
-        const text = document.createTextNode(item);
-        li.appendChild(text);
-
-        li.appendChild(checkbox);
-        li.appendChild(deleteBtn);
-
-        todoList.appendChild(li);
-    })
+        todoLists.forEach((item,index)=> {
+            const li = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
     
-    input.value="";
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = "❌";
+            deleteBtn.addEventListener("click", () => handleDeleteBtnClick(index));
+    
+            const text = document.createTextNode(item);
+
+            li.appendChild(text);
+            li.appendChild(checkbox);
+            li.appendChild(deleteBtn);
+            todoList.appendChild(li);
+        });
+
+        countItem.textContent = `${todoLists.length}개 항목 남음`;
 }
+
+// function handleAddBtnClick(e){
+//     e.preventDefault();
+
+//     todoLists.push(input.value);
+//     todoList.innerHTML = "";
+
+//     todoLists.map((item,index)=> {
+//         const li = document.createElement('li');
+//         const checkbox = document.createElement('input');
+//         checkbox.type = 'checkbox';
+
+//         const deleteBtn = document.createElement('button');
+//         deleteBtn.textContent = "❌";
+//         deleteBtn.addEventListener("click", () => handleDeleteBtnClick(index));
+
+//         const text = document.createTextNode(item);
+//         li.appendChild(text);
+
+//         li.appendChild(checkbox);
+//         li.appendChild(deleteBtn);
+
+//         todoList.appendChild(li);
+//     })
+//     input.value="";
+// }
+
+function handleDeleteBtnClick(e){
+    todoLists = todoLists.filter((_ , i) =>i !== index);
+    renderTodoList();
+}
+
+
 
 addBtn.addEventListener("click",handleAddBtnClick);
