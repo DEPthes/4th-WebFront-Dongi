@@ -17,10 +17,12 @@ function renderTodoList(){
             deleteBtn.textContent = "❌";
             deleteBtn.addEventListener("click", () => handleDeleteBtnClick(index));
     
-            const text = document.createTextNode(item);
+            const text = document.createElement('span');
+            text.className = 'todo-text';
+            text.textContent = item;
 
-            li.appendChild(text);
             li.appendChild(checkbox);
+            li.appendChild(text);
             li.appendChild(deleteBtn);
             todoList.appendChild(li);
         });
