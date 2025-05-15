@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>5주차 과제</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>📍 날씨 정보 조회 앱</h1>
+        <h1> 날씨 정보 조회 앱</h1>
       
-        <div class="search">
-          <input type="text" id="city-input" placeholder="도시 이름을 입력하세요"/>
-          <button id="search-btn">🔍 검색</button>
-        </div>
+        <form class="weather-form" id="search-form">
+          <input class="weather-input" type="text" id="city-input" placeholder="도시 이름을 입력하세요"/>
+          <button class="weather-button" id="search-btn" type="submit">검색</button>
+        </form>
       
         <div id="weather-card" class="hidden">
           <p id="description">날씨 정보</p>
           <p id="temp">온도</p>
           <p id="location">도시, 국가</p>
-          <img id="icon" src="https://openweathermap.org/img/wn/10d@2x.png" alt="날씨 아이콘" />
+          <img id="icon"/>
         </div>
     </div>
 </body>
