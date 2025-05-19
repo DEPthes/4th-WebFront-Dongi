@@ -1,0 +1,14 @@
+// 계산 결과/ 입력 보여주는 화면
+//입력값 또는 결과를 보여주는 단순 컴포넌트
+import './Display.css';
+
+function Display({value}){
+    return(
+      <div className='container'>
+        <div className='container-expression'>{value}</div>
+        <div className="container-display">{value}</div>
+      </div>    
+    );
+}
+
+export default Display;
