@@ -4,10 +4,10 @@ import './Display.css';
 
 function Display({value}){
     return(
-      <div className='container'>
+      <>
         <div className='container-expression'>{value}</div>
         <div className="container-display">{value}</div>
-      </div>    
+      </>    
     );
 }
 

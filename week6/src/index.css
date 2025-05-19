@@ -11,3 +11,11 @@ body{
     align-items: center;
     min-height: 100vh;
 }
+
+.container{
+    border: solid 3px darkgray;
+    width: 90%;
+    max-width: 400px;
+    min-width: 280px;
+    border-radius: 10px;
+}
