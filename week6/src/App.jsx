@@ -1,15 +1,43 @@
 import Display from './components/Display';
 import { NumButton, OperatorButton, ControlButton, EqualButton } from './components/Button';
 import { useState } from 'react';
-
-
+import calculate from './utills/calculate';
 
 function App() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState('0');
+  const [prev, setPrev] = useState(null);
+  const [oper, setOper] = useState(null);
 
-  function handleClick(value){  //버튼 클릭 시 호출할 함수
-    setInput((prevInput) => prevInput + value)
-}
+  function handleClick(value){  
+    if (["+","-","x","%"].includes(value)){
+       setPrev(input);
+       setOper(value);
+       setInput((prevInput) => prevInput + value);
+
+    } else if (value === "="){
+       const result = calculate(prev, oper, input);
+       setInput(result);
+
+    } else if (value === "CA"){
+       setInput("0");
+
+    } else if (value === "."){
+       setInput((prevInput) => 
+        prevInput.includes(".")? prevInput : prevInput + value
+      );
+
+
+    } else { //표현식말고밑에거먼저구현
+      setInput((prev)=>
+        prev === "0" ? value : prev + value
+      );
+//     setInput(value);
+//     setInput((prevInput) => prevInput + value);
+       
+
+
+    }
+  } 
 
   return (
     <div className='container'>
@@ -39,5 +67,4 @@ function App() {
   );
 }
 
-
-export default App
+export default App;
