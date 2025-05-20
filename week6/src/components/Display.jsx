@@ -2,10 +2,10 @@
 //입력값 또는 결과를 보여주는 단순 컴포넌트
 import './Display.css';
 
-function Display({value}){
+function Display({value,expression}){
     return(
       <>
-        <div className='container-expression'>{value}</div>
+        <div className='container-expression'>{expression}</div>
         <div className="container-display">{value}</div>
       </>    
     );
