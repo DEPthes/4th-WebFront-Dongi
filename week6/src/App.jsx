@@ -21,15 +21,15 @@ function App() {
     } else if (value === "CA"){
        setInput("0");
 
-    } else if (value === "."){
+    } else if (value === "."){ //연산자 뒤에도 안되도록 추가
        setInput((prevInput) => 
         prevInput.includes(".")? prevInput : prevInput + value
       );
 
 
     } else { //표현식말고밑에거먼저구현
-      setInput((prev)=>
-        prev === "0" ? value : prev + value
+      setInput((prevInput)=>
+        prevInput === "0" ? value : prevInput + value
       );
 //     setInput(value);
 //     setInput((prevInput) => prevInput + value);
