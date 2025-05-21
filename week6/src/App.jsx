@@ -14,62 +14,59 @@ function App() {
 
   function handleClick(value){  
     if (["+","-","x","%"].includes(value)){
-       setPrev(input);
-       setOper(value);
-       setInput(input);
+      setPrev(input);
+      setOper(value);
+      setInput(input);
 
-    setExpression(prev => {
-        if (prev.includes("=")) return input + value; // '=' 이후 연산자 시작
-        if (isOperatorClicked) return prev.slice(0, -1) + value; // 연산자 교체
-        return prev + value; // 새 연산자 추가
-      });
+      setExpression(prev => {
+          if (prev.includes("=")) return input + value;
+          if (isOperatorClicked) return prev.slice(0, -1) + value; 
+          return prev + value; 
+        });
 
-      //  setExpression((prevInput) => 
-      //   prevInput.includes("=") ? input + value : prevInput + value
-      // );
-      // if (isOperatorClicked){
-      //   setExpression(prev => prev.slice(0, -1) + value);
-      // } else{
-      //   setIsOperatorClicked(false);
-      //   setExpression(prev => prev + value);
-      // } 
-      
-       setIsOperatorClicked(true);
-
+      setIsOperatorClicked(true);
 
 
 
     } else if (value === "="){       
-       const result = calculate(prev, oper, input);
-       setIsResulted(true);
+      const result = calculate(prev, oper, input);
+      setIsResulted(true);
 
-       if (result === "0으로 나눌 수 없습니다") {
+      if (result === "0으로 나눌 수 없습니다") {
           setInput(result);
           setExpression(" ");
-        } else {
+      } else {
           setInput(result);
           setExpression(prev => prev + value);
-        }
+      }
         
-       
-    } else if (value === "CA"){
-       setInput("0");
-       setExpression("0");
-       setIsResulted(false);
 
-    } else if (value === "."){ //연산자 뒤에도 안되도록 추가,5.2 이런식으로 안됨
-       setInput((prevInput) => {
-      const lastChar = prevInput.slice(-1);
-      return prevInput.includes(".")||["+","-","x","%"].includes(lastChar) 
-      ? prevInput 
-      : prevInput + value
+    } else if (value === "CA"){
+      setInput("0");
+      setExpression("0");
+      setIsResulted(false);
+
+
+    } else if (value === "."){  
+      setInput((prevInput) => {
+        const parts = prevInput.split(/[+\-x%]/);
+        const currentNumber = parts[parts.length -1];
+
+        const lastChar = prevInput.slice(-1);
+        return currentNumber.includes(".")||["+","-","x","%"].includes(lastChar) 
+        ? prevInput 
+        : prevInput + value
     });
-       setExpression((prevExpression) => {
-      const lastChar = prevExpression.slice(-1);
-      return prevExpression.includes(".")||["+","-","x","%"].includes(lastChar) 
-      ? prevExpression 
-      : prevExpression + value
-       });
+
+      setExpression((prevExpression) => {
+        const parts = prevExpression.split(/[+\-x%]/);
+        const currentNumber = parts[parts.length -1];
+
+        const lastChar = prevExpression.slice(-1);
+        return currentNumber.includes(".")||["+","-","x","%"].includes(lastChar) 
+        ? prevExpression 
+        : prevExpression + value
+    });
 
 
     } else if (isResulted){ 
@@ -78,22 +75,20 @@ function App() {
       setIsResulted(false);
 
     } else { //숫자
-
       setInput((prevInput) => {
-      const lastChar = prevInput.slice(-1);
-      if (prevInput === "0") {
+        const lastChar = prevInput.slice(-1);
+        if (prevInput === "0") {
         return value;
-      } else if (lastChar ===".") {          
+        } else if (lastChar ===".") {          
         return prevInput + value;
-      } else if (isResulted){
+        } else if (isResulted){
         return value; 
-      } else if(isOperatorClicked ){
+       } else if(isOperatorClicked ){
         setIsOperatorClicked(false);
         return value;
-      } else { //숫자 이어서 쓸때
+        } else { //숫자 이어서 쓸때
         return prevInput+value;
-      }
-      
+      }   
     });
 
       setExpression((prevExpression)=>{
@@ -113,11 +108,7 @@ function App() {
     });
     setIsOperatorClicked(false);
     }
-
-
   } 
-
-//0말고 숫자 뒤에 숫자 입력시 이어져서 나오게
 
 
   return (
