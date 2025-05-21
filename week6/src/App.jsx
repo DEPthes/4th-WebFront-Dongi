@@ -11,12 +11,15 @@ function App() {
   const [prev, setPrev] = useState(null);
   const [oper, setOper] = useState(null);
   const [isResulted, setIsResulted] = useState(false);
+  const [isOperatorClicked, setIsOperatorClicked] = useState(false);
+
 
   function handleClick(value){  
     if (["+","-","x","%"].includes(value)){
        setPrev(input);
        setOper(value);
        setInput(input);
+       setIsOperatorClicked(true);
        //= 하고 연산자 치면  결과값에다가 연산하도록
        setExpression((prevInput) => 
         prevInput.includes("=") ? input + value : prevInput + value
@@ -50,7 +53,6 @@ function App() {
 
 
     } else if (value === "."){ //연산자 뒤에도 안되도록 추가,5.2 이런식으로 안됨
-
        setInput((prevInput) => {
       const lastChar = prevInput.slice(-1);
       return prevInput.includes(".")||["+","-","x","%"].includes(lastChar) 
@@ -90,8 +92,13 @@ function App() {
         return value;
       } else if (lastChar ===".") {          
         return prevInput + value;
-      } else {
+      } else if (lastChar === "="){
+        return ; 
+      } else if(isOperatorClicked ){
+        setIsOperatorClicked(false);
         return value;
+      } else { //숫자 이어서 쓸때
+        return prevInput+value;
       }
     });
       setExpression((prevExpression)=>{
@@ -101,15 +108,17 @@ function App() {
         } else if (lastChar === "."){          
           return prevExpression + value;
         } else if (lastChar === "="){
-          return  " ";
+          return  " "; //연산산결과값 리턴 해야함
       } else{
         return prevExpression + value;
       }
     });
     }
+
+
   } 
 
-
+//0말고 숫자 뒤에 숫자 입력시 이어져서 나오게
 
 
 
