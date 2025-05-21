@@ -25,32 +25,23 @@ function App() {
         prevInput.includes("=") ? input + value : prevInput + value
       );
 
-
-
-
-
     } else if (value === "="){       
        const result = calculate(prev, oper, input);
-       setInput(result);
-       setExpression((prevInput) => 
-        //공백 넣으면 UI 찌그러짐
-        result==="0으로 나눌 수 없습니다"? " ": prevInput + value); 
        setIsResulted(true);
 
-
-
-
-
-
+       if (result === "0으로 나눌 수 없습니다") {
+          setInput(result);
+          setExpression(" ");
+        } else {
+          setInput(result);
+          setExpression(prev => prev + value);
+        }
+        
+       
     } else if (value === "CA"){
        setInput("0");
        setExpression("0");
        setIsResulted(false);
-
-
-
-
-
 
     } else if (value === "."){ //연산자 뒤에도 안되도록 추가,5.2 이런식으로 안됨
        setInput((prevInput) => {
@@ -64,26 +55,13 @@ function App() {
       return prevExpression.includes(".")||["+","-","x","%"].includes(lastChar) 
       ? prevExpression 
       : prevExpression + value
-
        });
 
 
-
-
-
-
-
-    } else if (isResulted){ //=
+    } else if (isResulted){ 
       setInput(value);
-      
       setExpression(value);
       setIsResulted(false);
-
-
-
-
-
-
 
     } else { //숫자
       setInput((prevInput) => {
@@ -92,8 +70,8 @@ function App() {
         return value;
       } else if (lastChar ===".") {          
         return prevInput + value;
-      } else if (lastChar === "="){
-        return ; 
+      } else if (isResulted){
+        return value; 
       } else if(isOperatorClicked ){
         setIsOperatorClicked(false);
         return value;
@@ -107,8 +85,11 @@ function App() {
           return value;
         } else if (lastChar === "."){          
           return prevExpression + value;
-        } else if (lastChar === "="){
-          return  " "; //연산산결과값 리턴 해야함
+        } else if (isResulted){
+          return  "result"; 
+         } else if(isOperatorClicked ){ // 이 부분 연산자 눌러진 후 숫자 누르면 이전 식에 들어온 값으로 보이는 거 아니야?
+          setIsOperatorClicked(false);
+          return prevExpression + value;
       } else{
         return prevExpression + value;
       }
@@ -119,9 +100,6 @@ function App() {
   } 
 
 //0말고 숫자 뒤에 숫자 입력시 이어져서 나오게
-
-
-
 
 
   return (
