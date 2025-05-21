@@ -21,8 +21,6 @@ function App() {
        setExpression((prevInput) => 
         prevInput.includes("=") ? input + value : prevInput + value
       );
-       //setExpression((prevInput) => prevInput + value
-      //);
 
 
 
@@ -86,24 +84,28 @@ function App() {
 
 
     } else { //숫자
-       setInput((prevInput)=>
-  //      prevInput === "0" ? value : "" + value
-  //  //    prevInput === "." ? prevInput+value: value
-  //     );
-  {
-  if (prevInput === "0") {
-    return value;
-  } else if (prevInput === ".") {
-    return prevInput + value;
-  } else {
-    return prevInput + value;
-  }
-});
-       setExpression((prevExpression)=>
-       prevExpression === "0" 
-       ? value 
-       : prevExpression + value       
-      );
+      setInput((prevInput) => {
+      const lastChar = prevInput.slice(-1);
+      if (prevInput === "0") {
+        return value;
+      } else if (lastChar ===".") {          
+        return prevInput + value;
+      } else {
+        return value;
+      }
+    });
+      setExpression((prevExpression)=>{
+        const lastChar = prevExpression.slice(-1);
+        if (prevExpression === "0"){
+          return value;
+        } else if (lastChar === "."){          
+          return prevExpression + value;
+        } else if (lastChar === "="){
+          return  " ";
+      } else{
+        return prevExpression + value;
+      }
+    });
     }
   } 
 
