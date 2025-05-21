@@ -3,6 +3,8 @@ import { NumButton, OperatorButton, ControlButton, EqualButton } from './compone
 import { useState } from 'react';
 import calculate from './utills/calculate';
 
+
+//수정할 거: 소수점, 결과값에 더할 때 expression 처리
 function App() {
   const [expression, setExpression] = useState("0");
   const [input, setInput] = useState("0");
@@ -15,40 +17,101 @@ function App() {
        setPrev(input);
        setOper(value);
        setInput(input);
-       setExpression((prevInput) => prevInput + value
+       //= 하고 연산자 치면  결과값에다가 연산하도록
+       setExpression((prevInput) => 
+        prevInput.includes("=") ? input + value : prevInput + value
       );
+       //setExpression((prevInput) => prevInput + value
+      //);
 
 
-    } else if (value === "="){
-       
+
+
+
+    } else if (value === "="){       
        const result = calculate(prev, oper, input);
        setInput(result);
-       setExpression((prevInput) => prevInput + value);
+       setExpression((prevInput) => 
+        //공백 넣으면 UI 찌그러짐
+        result==="0으로 나눌 수 없습니다"? " ": prevInput + value); 
        setIsResulted(true);
+
+
+
+
+
 
     } else if (value === "CA"){
        setInput("0");
        setExpression("0");
+       setIsResulted(false);
 
-    } else if (value === "."){ //연산자 뒤에도 안되도록 추가
-       setInput((prevInput) => 
-       prevInput.includes(".")? prevInput : prevInput + value
-      );
+
+
+
+
+
+    } else if (value === "."){ //연산자 뒤에도 안되도록 추가,5.2 이런식으로 안됨
+
+       setInput((prevInput) => {
+      const lastChar = prevInput.slice(-1);
+      return prevInput.includes(".")||["+","-","x","%"].includes(lastChar) 
+      ? prevInput 
+      : prevInput + value
+    });
+       setExpression((prevExpression) => {
+      const lastChar = prevExpression.slice(-1);
+      return prevExpression.includes(".")||["+","-","x","%"].includes(lastChar) 
+      ? prevExpression 
+      : prevExpression + value
+
+       });
+
+
+
+
+
+
+
     } else if (isResulted){ //=
       setInput(value);
+      
       setExpression(value);
       setIsResulted(false);
 
 
+
+
+
+
+
     } else { //숫자
        setInput((prevInput)=>
-       prevInput === "0" ? value : "" + value
-      );
-       setExpression((prevInput)=>
-       prevInput === "0" ? value : prevInput+ value       
+  //      prevInput === "0" ? value : "" + value
+  //  //    prevInput === "." ? prevInput+value: value
+  //     );
+  {
+  if (prevInput === "0") {
+    return value;
+  } else if (prevInput === ".") {
+    return prevInput + value;
+  } else {
+    return prevInput + value;
+  }
+});
+       setExpression((prevExpression)=>
+       prevExpression === "0" 
+       ? value 
+       : prevExpression + value       
       );
     }
   } 
+
+
+
+
+
+
 
   return (
     <div className='container'>
