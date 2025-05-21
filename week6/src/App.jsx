@@ -3,8 +3,6 @@ import { NumButton, OperatorButton, ControlButton, EqualButton } from './compone
 import { useState } from 'react';
 import calculate from './utills/calculate';
 
-
-//수정할 거: 소수점, 결과값에 더할 때 expression 처리
 function App() {
   const [expression, setExpression] = useState("0");
   const [input, setInput] = useState("0");
@@ -19,11 +17,27 @@ function App() {
        setPrev(input);
        setOper(value);
        setInput(input);
+
+    setExpression(prev => {
+        if (prev.includes("=")) return input + value; // '=' 이후 연산자 시작
+        if (isOperatorClicked) return prev.slice(0, -1) + value; // 연산자 교체
+        return prev + value; // 새 연산자 추가
+      });
+
+      //  setExpression((prevInput) => 
+      //   prevInput.includes("=") ? input + value : prevInput + value
+      // );
+      // if (isOperatorClicked){
+      //   setExpression(prev => prev.slice(0, -1) + value);
+      // } else{
+      //   setIsOperatorClicked(false);
+      //   setExpression(prev => prev + value);
+      // } 
+      
        setIsOperatorClicked(true);
-       //= 하고 연산자 치면  결과값에다가 연산하도록
-       setExpression((prevInput) => 
-        prevInput.includes("=") ? input + value : prevInput + value
-      );
+
+
+
 
     } else if (value === "="){       
        const result = calculate(prev, oper, input);
@@ -64,6 +78,7 @@ function App() {
       setIsResulted(false);
 
     } else { //숫자
+
       setInput((prevInput) => {
       const lastChar = prevInput.slice(-1);
       if (prevInput === "0") {
@@ -78,7 +93,9 @@ function App() {
       } else { //숫자 이어서 쓸때
         return prevInput+value;
       }
+      
     });
+
       setExpression((prevExpression)=>{
         const lastChar = prevExpression.slice(-1);
         if (prevExpression === "0"){
@@ -94,6 +111,7 @@ function App() {
         return prevExpression + value;
       }
     });
+    setIsOperatorClicked(false);
     }
 
 
