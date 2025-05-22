@@ -4,14 +4,15 @@ import calculate from './utills/calculate';
 import { useState } from 'react';
 
 function App() {
-  const [isOperatorClicked, setIsOperatorClicked] = useState(false);
-  const [isResulted, setIsResulted] = useState(false);
   const [expression, setExpression] = useState("0");
   const [input, setInput] = useState("0");
   const [prev, setPrev] = useState(null);
   const [oper, setOper] = useState(null);
+  const [isOperatorClicked, setIsOperatorClicked] = useState(false);
+  const [isResulted, setIsResulted] = useState(false);
 
   const operators = ["+", "-", "x", "%"];
+
   const updateInput = (value) => {
     setInput((prev)=> {
       const lastchar = prev.slice(-1);
@@ -37,82 +38,82 @@ function App() {
       setOper(value);
       updateExpression(value);
       setIsOperatorClicked(true);
-
+      return;
+    }
     // 등호
-    } else if (value === "="){ 
+    if (value === "=") {
       const result = calculate(prev, oper, input);
       setIsResulted(true);
-
       if (result === "0으로 나눌 수 없습니다") {
-          setInput(result);
-          setExpression("오류");  
+        setInput(result);
+        setExpression("오류");
       } else {
-          setInput(result);
-          setExpression(prev => prev + value);
+        setInput(result);
+        setExpression((prev) => prev + value);
       }
+      return;
+    }
         
-;   // 초기화
-    } else if (value === "CA"){ 
+  // 초기화
+    if (value === "CA") {
       setInput("0");
       setExpression("0");
       setIsResulted(false);
+      return;
+    }
+
 
     // 소수점 
-    } else if (value === "."){  
-      if(isResulted){
+    if (value === ".") {
+      if (isResulted) {
         setInput("0.");
         setExpression("0.");
         setIsResulted(false);
         return;
       }
+
       setInput((prev) => {
         const parts = prev.split(/[+\-x%]/);
         const currentNumber = parts[parts.length -1] || "";
         const lastChar = prev.slice(-1);
-        return currentNumber.includes(".")||operators.includes(lastChar) 
-        ? prev 
-        : prev + value
+        return currentNumber.includes(".")||operators.includes(lastChar) ? prev : prev + value
     });
+
       setExpression((prev) => {
         const parts = prev.split(/[+\-x%]/);
         const currentNumber = parts[parts.length -1] || "";
         const lastChar = prev.slice(-1);
-        return currentNumber.includes(".")||operators.includes(lastChar) 
-        ? prev 
-        : prev + value
-    });
+        return currentNumber.includes(".") || operators.includes(lastChar) ? prev : prev + value;
+      });
+       return;
+    }
 
-
-    } else if (isResulted){ 
+    if (isResulted) {
       setInput(value);
       setExpression(input + value);
       setIsResulted(false);
       setIsOperatorClicked(false);
-
-
-    // 숫자
-    } else { 
-      setIsResulted(false);
-      updateInput(value);
-   // 결과식에 대해 연산할 때 숫자 + 연산 + 숫자에서 연산 안 뜸 
-      setExpression((prev) => {
-        const lastChar = prev.slice(-1);
-        if(isResulted){
-          setIsResulted(false);
-          return prev+oper+value;
-        }
-        if (prev === "0") return value;
-        if (lastChar === ".") return prev + value;
-        if (isOperatorClicked) {
-          setIsOperatorClicked(false);
-          return prev + value;
-        }
-        return prev + value;
-        });
+      return;
     }
-  } 
 
-
+    // 숫자 처리
+    setIsResulted(false);
+    updateInput(value);
+    setExpression((prev) => {
+      const lastChar = prev.slice(-1);
+      if (isResulted) {
+        setIsResulted(false);
+        return prev + oper + value;
+      }
+      if (prev === "0") return value;
+      if (lastChar === ".") return prev + value;
+      if (isOperatorClicked) {
+        setIsOperatorClicked(false);
+        return prev + value;
+      }
+      return prev + value;
+    });
+  };
 
   return (
     <div className='container'>
