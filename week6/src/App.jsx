@@ -34,7 +34,7 @@ function App() {
 
       if (result === "0으로 나눌 수 없습니다") {
           setInput(result);
-          setExpression(" ");
+          setExpression(" ");  //공백으로 UI크기 변동됨됨
       } else {
           setInput(result);
           setExpression(prev => prev + value);
@@ -48,24 +48,24 @@ function App() {
 
 
     } else if (value === "."){  
-      setInput((prevInput) => {
-        const parts = prevInput.split(/[+\-x%]/);
-        const currentNumber = parts[parts.length -1];
+      setInput((prev) => {
+        const parts = prev.split(/[+\-x%]/);
+        const currentNumber = parts[parts.length -1] || "";
+        const lastChar = prev.slice(-1);
 
-        const lastChar = prevInput.slice(-1);
         return currentNumber.includes(".")||["+","-","x","%"].includes(lastChar) 
-        ? prevInput 
-        : prevInput + value
+        ? prev 
+        : prev + value
     });
 
-      setExpression((prevExpression) => {
-        const parts = prevExpression.split(/[+\-x%]/);
-        const currentNumber = parts[parts.length -1];
-
-        const lastChar = prevExpression.slice(-1);
+      setExpression((prev) => {
+        const parts = prev.split(/[+\-x%]/);
+        const currentNumber = parts[parts.length -1] || "";
+        const lastChar = prev.slice(-1);
+        
         return currentNumber.includes(".")||["+","-","x","%"].includes(lastChar) 
-        ? prevExpression 
-        : prevExpression + value
+        ? prev 
+        : prev + value
     });
 
 
@@ -75,35 +75,36 @@ function App() {
       setIsResulted(false);
 
     } else { //숫자
-      setInput((prevInput) => {
-        const lastChar = prevInput.slice(-1);
-        if (prevInput === "0") {
+      setInput((prev) => {
+        const lastChar = prev.slice(-1);
+        if (prev === "0") {
         return value;
         } else if (lastChar ===".") {          
-        return prevInput + value;
+        return prev + value;
         } else if (isResulted){
         return value; 
+
        } else if(isOperatorClicked ){
         setIsOperatorClicked(false);
         return value;
         } else { //숫자 이어서 쓸때
-        return prevInput+value;
+        return prev+value;
       }   
     });
 
-      setExpression((prevExpression)=>{
-        const lastChar = prevExpression.slice(-1);
-        if (prevExpression === "0"){
+      setExpression((prev)=>{
+        const lastChar = prev.slice(-1);
+        if (prev === "0"){
           return value;
         } else if (lastChar === "."){          
-          return prevExpression + value;
+          return prev + value;
         } else if (isResulted){
           return  "result"; 
-         } else if(isOperatorClicked ){ // 이 부분 연산자 눌러진 후 숫자 누르면 이전 식에 들어온 값으로 보이는 거 아니야?
+         } else if(isOperatorClicked ){
           setIsOperatorClicked(false);
-          return prevExpression + value;
+          return prev + value;
       } else{
-        return prevExpression + value;
+        return prev + value;
       }
     });
     setIsOperatorClicked(false);
