@@ -1,69 +1,83 @@
-import Display from './components/Display';
 import { NumButton, OperatorButton, ControlButton, EqualButton } from './components/Button';
-import { useState } from 'react';
+import Display from './components/Display';
 import calculate from './utills/calculate';
+import { useState } from 'react';
 
 function App() {
+  const [isOperatorClicked, setIsOperatorClicked] = useState(false);
+  const [isResulted, setIsResulted] = useState(false);
   const [expression, setExpression] = useState("0");
   const [input, setInput] = useState("0");
   const [prev, setPrev] = useState(null);
   const [oper, setOper] = useState(null);
-  const [isResulted, setIsResulted] = useState(false);
-  const [isOperatorClicked, setIsOperatorClicked] = useState(false);
 
+  const operators = ["+", "-", "x", "%"];
+  const updateInput = (value) => {
+    setInput((prev)=> {
+      const lastchar = prev.slice(-1);
+      if(prev === "0") return value;
+      if(lastchar === ".") return prev + value;
+      if(isOperatorClicked || isResulted) return value;
+      return prev + value;
+    });
+  };
+
+  const updateExpression = (value) => {
+    setExpression((prev) => {
+      if (isResulted) return input + value;
+      if (isOperatorClicked) return prev.slice(0, -1) + value;
+      return prev + value;
+    });
+  };
 
   function handleClick(value){  
-    if (["+","-","x","%"].includes(value)){
+    // 연산자
+    if (operators.includes(value)){ 
       setPrev(input);
       setOper(value);
-      setInput(input);
-
-      setExpression(prev => {
-          if (prev.includes("=")) return input + value;
-          if (isOperatorClicked) return prev.slice(0, -1) + value; 
-          return prev + value; 
-        });
-
+      updateExpression(value);
       setIsOperatorClicked(true);
 
-
-
-    } else if (value === "="){       
+    // 등호
+    } else if (value === "="){ 
       const result = calculate(prev, oper, input);
       setIsResulted(true);
 
       if (result === "0으로 나눌 수 없습니다") {
           setInput(result);
-          setExpression(" ");  //공백으로 UI크기 변동됨됨
+          setExpression("오류");  
       } else {
           setInput(result);
           setExpression(prev => prev + value);
       }
         
-
-    } else if (value === "CA"){
+;   // 초기화
+    } else if (value === "CA"){ 
       setInput("0");
       setExpression("0");
       setIsResulted(false);
 
-
+    // 소수점 
     } else if (value === "."){  
+      if(isResulted){
+        setInput("0.");
+        setExpression("0.");
+        setIsResulted(false);
+        return;
+      }
       setInput((prev) => {
         const parts = prev.split(/[+\-x%]/);
         const currentNumber = parts[parts.length -1] || "";
         const lastChar = prev.slice(-1);
-
-        return currentNumber.includes(".")||["+","-","x","%"].includes(lastChar) 
+        return currentNumber.includes(".")||operators.includes(lastChar) 
         ? prev 
         : prev + value
     });
-
       setExpression((prev) => {
         const parts = prev.split(/[+\-x%]/);
         const currentNumber = parts[parts.length -1] || "";
         const lastChar = prev.slice(-1);
-        
-        return currentNumber.includes(".")||["+","-","x","%"].includes(lastChar) 
+        return currentNumber.includes(".")||operators.includes(lastChar) 
         ? prev 
         : prev + value
     });
@@ -71,45 +85,33 @@ function App() {
 
     } else if (isResulted){ 
       setInput(value);
-      setExpression(value);
+      setExpression(input + value);
       setIsResulted(false);
+      setIsOperatorClicked(false);
 
-    } else { //숫자
-      setInput((prev) => {
+
+    // 숫자
+    } else { 
+      setIsResulted(false);
+      updateInput(value);
+   // 결과식에 대해 연산할 때 숫자 + 연산 + 숫자에서 연산 안 뜸 
+      setExpression((prev) => {
         const lastChar = prev.slice(-1);
-        if (prev === "0") {
-        return value;
-        } else if (lastChar ===".") {          
-        return prev + value;
-        } else if (isResulted){
-        return value; 
-
-       } else if(isOperatorClicked ){
-        setIsOperatorClicked(false);
-        return value;
-        } else { //숫자 이어서 쓸때
-        return prev+value;
-      }   
-    });
-
-      setExpression((prev)=>{
-        const lastChar = prev.slice(-1);
-        if (prev === "0"){
-          return value;
-        } else if (lastChar === "."){          
-          return prev + value;
-        } else if (isResulted){
-          return  "result"; 
-         } else if(isOperatorClicked ){
+        if(isResulted){
+          setIsResulted(false);
+          return prev+oper+value;
+        }
+        if (prev === "0") return value;
+        if (lastChar === ".") return prev + value;
+        if (isOperatorClicked) {
           setIsOperatorClicked(false);
           return prev + value;
-      } else{
+        }
         return prev + value;
-      }
-    });
-    setIsOperatorClicked(false);
+        });
     }
   } 
+
 
 
   return (
