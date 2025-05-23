@@ -48,7 +48,8 @@ function App() {
     if (operators.includes(value)) return handleOperator(value);
     if (value === "=") return handleEqual();
     if (value === "CA") return handleClear();
-    if (value === ".") return handleDecimal();
+    if (value === ".") return handleDecimal(value);
+    
     };
 
     const handleOperator = (value) => {
@@ -78,31 +79,25 @@ function App() {
       setIsResulted(false);
     };
 
-    const handleDecimal = () => {
+    const handleDecimal = (value) => {
       if (isResulted) {
         setInput("0.");
         setExpression("0.");
         setIsResulted(false);
         return;
     }
+      //정규표현식 쓸때는 주석 쓰는 게 좋음
+      const parts = prev.split(/[+\-x%]/); //연산자 집합을 표현하는 정규표현식
+      const currentNumber = parts[parts.length -1] || "";
+      const lastChar = prev.slice(-1);
 
-      //split / 정규표현식 딥다이브 확인하기
-      //정규표현식 쓸떄는 주석 쓰는 게 좋음음
-      setInput((prev) => {
-        const parts = prev.split(/[+\-x%]/); //연산자 집합을 표현하는 정규표현식
-        const currentNumber = parts[parts.length -1] || "";
-        const lastChar = prev.slice(-1);
-        return currentNumber.includes(".")||operators.includes(lastChar) ? prev : prev + value
-    });
+      if(currentNumber.includes(".")||operators.includes(lastChar)) return;
 
-      setExpression((prev) => {
-        const parts = prev.split(/[+\-x%]/);
-        const currentNumber = parts[parts.length -1] || "";
-        const lastChar = prev.slice(-1);
-        return currentNumber.includes(".") || operators.includes(lastChar) ? prev : prev + value;
-      });
-       return;
-    }
+      setInput((prev) => prev+value);
+      setExpression((prev) => prev + value);           
+    };
+
+
 
     if (isResulted) {
       setInput(value);
