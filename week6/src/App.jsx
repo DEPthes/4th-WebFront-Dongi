@@ -1,8 +1,8 @@
 import { NumButton, OperatorButton, ControlButton, EqualButton } from './components/Button';
+import buttonList from './datas/buttonList';
 import Display from './components/Display';
 import calculate from './utills/calculate';
 import { useState } from 'react';
-
 
 
 //함수로 따로 관리.
@@ -15,7 +15,6 @@ import { useState } from 'react';
 
 function App() {
   const [expression, setExpression] = useState("0");
-  //useRef로 input 관리. 초기화 함수 따로 만들고 ... 다 함수 나눠서. 
   const [input, setInput] = useState("0");
   const [prev, setPrev] = useState(null);
   const [oper, setOper] = useState(null);
@@ -121,7 +120,7 @@ function App() {
         <EqualButton value="=" onClick={handleClick}/>
       </div>
       <div className="button-grid">
-          <NumButton value="7" onClick={handleClick}/>
+          {/* <NumButton value="7" onClick={handleClick}/>
           <NumButton value="8" onClick={handleClick}/>
           <NumButton value="9" onClick={handleClick}/>
           <OperatorButton value="%" onClick={handleClick}/>
@@ -136,7 +135,7 @@ function App() {
           <NumButton value="0" onClick={handleClick}/>   
           <ControlButton value="." onClick={handleClick}/>   
           <ControlButton value="CA" onClick={handleClick}/>
-          <OperatorButton value="+" onClick={handleClick}/>
+          <OperatorButton value="+" onClick={handleClick}/> */}
         </div>
     </div>
   );
