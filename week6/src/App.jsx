@@ -34,9 +34,6 @@ function App() {
     });
   };
 
-
-
-
   const updateExpression = (value) => {
     setExpression((prev) => {
       if (isResulted) return input + value;
@@ -46,18 +43,11 @@ function App() {
   };
 
 
-
-
-
+  
   const handleClick = (value) => {  
-    // 연산자
     if (operators.includes(value)) return handleOperator(value);
     if (value === "=") return handleEqual();
-      // setPrev(input);
-      // setOper(value);
-      // updateExpression(value);// 수식에 연산자 추가
-      // setIsOperatorClicked(true);  // 연산자 클릭 상태 설정
-      // return;
+    if (value === "CA") return handleClear();
     };
 
     const handleOperator = (value) => {
@@ -80,14 +70,12 @@ function App() {
       }
     };
 
-        
-  // 초기화
-    if (value === "CA") {
+
+    const handleClear = () => {
       setInput("0");
       setExpression("0");
       setIsResulted(false);
-      return;
-    }
+    };
 
 
     // 소수점 
