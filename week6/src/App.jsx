@@ -11,88 +11,97 @@ import { useState } from 'react';
 //map으로. 그리고 data로
 
 function App() {
-  const [expression, setExpression] = useState("0");
-  const [input, setInput] = useState("0");
+  const [expression, setExpression] = useState('0');
+  const [input, setInput] = useState('0');
   const [prev, setPrev] = useState(null);
   const [oper, setOper] = useState(null);
   const [isOperatorClicked, setIsOperatorClicked] = useState(false);
   const [isResulted, setIsResulted] = useState(false);
 
-  const operators = ["+", "-", "x", "%"];
+  const operators = ['+', '-', 'x', '%'];
 
   const updateInput = (value) => {
       const lastchar = input.slice(-1);
-      if(input === "0"||isOperatorClicked || isResulted) {
+      if(input === '0'||isOperatorClicked || isResulted) {
         setInput(value);
         return;
       }
-      if(lastchar === ".") {
+      if(lastchar === '.') {
         setInput(input + value);
+        return;
       }
       setInput((prev) => prev + value);
   };
 
   const updateExpression = (value) => {
-      if (isResulted) return input + value;
-      if (isOperatorClicked) return prev.slice(0, -1) + value;
+      if (isResulted) {
+        setExpression(input + value);
+        return;
+      }
+      if (isOperatorClicked) {
+        setExpression((prev) => (prev.slice(0, -1) + value));
+        return;
+      }
       setExpression((prev) => prev + value);
     };
 
   const handleClick = (value) => {  
       if (operators.includes(value)) return handleOperator(value);
-      if (value === "=") return handleEqual();
-      if (value === "CA") return handleClear();
-      if (value === ".") return handleDecimal(value);
+      if (value === '=') return handleEqual();
+      if (value === 'CA') return handleClear();
+      if (value === '.') return handleDecimal();
       return handleNumber(value);
     };
 
   const handleOperator = (value) => {
       setPrev(input);
       setOper(value);
-      updateExpression(input+value);
+      updateExpression(value);
       setIsOperatorClicked(true);
     };
 
-  const handleEqual = (value) => {
+  const handleEqual = () => {
       const result = calculate(prev, oper, input);
       setIsResulted(true);
-      if (result === "0으로 나눌 수 없습니다") {
+      if (result === '0으로 나눌 수 없습니다') {
         setInput(result);
-        setExpression("오류");
+        setExpression('오류');
       } else {
         setInput(result);
-        setExpression((prev) => prev + value);
+        setExpression((prev) => prev + '=');
       }
     };
         
   const handleClear = () => {
-      setInput("0");
-      setExpression("0");
+      setInput('0');
+      setExpression('0');
       setIsResulted(false);
+      setIsOperatorClicked(false);
     };
 
-  const handleDecimal = (value) => {
+  const handleDecimal = () => {
       if (isResulted) {
-          setInput("0.");
-          setExpression("0.");
+          setInput('0.');
+          setExpression('0.');
           setIsResulted(false);
+          setIsOperatorClicked(false);
           return;
     }
       //정규표현식 쓸때는 주석 쓰는 게 좋음
-      const parts = prev.split(/[+\-x%]/); //연산자 집합을 표현하는 정규표현식
-      const currentNumber = parts[parts.length -1] || "";
-      const lastChar = prev.slice(-1);
+      const parts = input.split(/[+\-x%]/); //연산자 집합을 표현하는 정규표현식
+      const currentNumber = parts[parts.length -1] || '';
+      const lastChar = input.slice(-1);
 
-      if(currentNumber.includes(".")||operators.includes(lastChar)) return;
+      if(currentNumber.includes('.')||operators.includes(lastChar)) return;
 
-      setInput((prev) => prev+value);
-      setExpression((prev) => prev + value);           
+      setInput((prev) => prev+'.');
+      setExpression((prev) => prev + '.');           
     };
 
     const handleNumber = (value) => {
       if (isResulted) {
         setInput(value);
-        setExpression(input + value);
+        setExpression(value);
         setIsResulted(false);
         setIsOperatorClicked(false);
         return;
@@ -102,8 +111,8 @@ function App() {
       updateInput(value);
       setExpression((prev) => {
         const lastChar = prev.slice(-1);
-        if (prev === "0") return value;
-        if (lastChar === ".") return prev + value;
+        if (prev === '0') return value;
+        if (lastChar ==='.' ) return prev + value;
         if (isOperatorClicked) {
           setIsOperatorClicked(false);
           return prev + value;
@@ -116,7 +125,7 @@ function App() {
 const buttonPanel = (value) => {
   if(Number.isInteger(Number(value))) return <NumButton key={value} value={value} onClick={handleClick}/>;
   if(operators.includes(value)) return <OperatorButton key={value} value={value} onClick={handleClick}/>;
-  if(value === "=") return  <EqualButton key={value} value={value} onClick={handleClick}/>;
+  if(value === '=') return  <EqualButton key={value} value={value} onClick={handleClick}/>;
   return <ControlButton key={value} value={value} onClick={handleClick}/>;
   };
 
