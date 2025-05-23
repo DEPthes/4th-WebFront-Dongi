@@ -25,40 +25,36 @@ function App() {
   const operators = ["+", "-", "x", "%"];
 
   const updateInput = (value) => {
-    setInput((prev)=> {
       const lastchar = prev.slice(-1);
       if(prev === "0") return value;
       if(lastchar === ".") return prev + value;
       if(isOperatorClicked || isResulted) return value;
-  //    setInput() prev + value;  setInput() 는 간단할 수록 좋음. 밑으로 빼자자
-    });
+
+      setInput((prev) => prev + value);
   };
 
   const updateExpression = (value) => {
-    setExpression((prev) => {
       if (isResulted) return input + value;
       if (isOperatorClicked) return prev.slice(0, -1) + value;
-      return prev + value;
-    });
-  };
+      setExpression((prev) => prev + value);
+    };
 
   const handleClick = (value) => {  
-    if (operators.includes(value)) return handleOperator(value);
-    if (value === "=") return handleEqual();
-    if (value === "CA") return handleClear();
-    if (value === ".") return handleDecimal(value);
-    return handleNumber(value);
-        };
+      if (operators.includes(value)) return handleOperator(value);
+      if (value === "=") return handleEqual();
+      if (value === "CA") return handleClear();
+      if (value === ".") return handleDecimal(value);
+      return handleNumber(value);
+    };
 
-    const handleOperator = (value) => {
+  const handleOperator = (value) => {
       setPrev(input);
       setOper(value);
       updateExpression(input+value);
       setIsOperatorClicked(true);
     };
 
-
-    const handleEqual = (value) => {
+  const handleEqual = (value) => {
       const result = calculate(prev, oper, input);
       setIsResulted(true);
       if (result === "0으로 나눌 수 없습니다") {
@@ -69,20 +65,19 @@ function App() {
         setExpression((prev) => prev + value);
       }
     };
-
-
-    const handleClear = () => {
+        
+  const handleClear = () => {
       setInput("0");
       setExpression("0");
       setIsResulted(false);
     };
 
-    const handleDecimal = (value) => {
+  const handleDecimal = (value) => {
       if (isResulted) {
-        setInput("0.");
-        setExpression("0.");
-        setIsResulted(false);
-        return;
+          setInput("0.");
+          setExpression("0.");
+          setIsResulted(false);
+          return;
     }
       //정규표현식 쓸때는 주석 쓰는 게 좋음
       const parts = prev.split(/[+\-x%]/); //연산자 집합을 표현하는 정규표현식
