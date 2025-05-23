@@ -52,6 +52,7 @@ function App() {
   const handleClick = (value) => {  
     // 연산자
     if (operators.includes(value)) return handleOperator(value);
+    if (value === "=") return handleEqual();
       // setPrev(input);
       // setOper(value);
       // updateExpression(value);// 수식에 연산자 추가
@@ -67,9 +68,7 @@ function App() {
     };
 
 
-    
-    // 등호
-    if (value === "=") {
+    const handleEqual = (value) => {
       const result = calculate(prev, oper, input);
       setIsResulted(true);
       if (result === "0으로 나눌 수 없습니다") {
@@ -79,8 +78,8 @@ function App() {
         setInput(result);
         setExpression((prev) => prev + value);
       }
-      return;
-    }
+    };
+
         
   // 초기화
     if (value === "CA") {
