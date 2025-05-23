@@ -43,11 +43,12 @@ function App() {
   };
 
 
-  
+
   const handleClick = (value) => {  
     if (operators.includes(value)) return handleOperator(value);
     if (value === "=") return handleEqual();
     if (value === "CA") return handleClear();
+    if (value === ".") return handleDecimal();
     };
 
     const handleOperator = (value) => {
@@ -77,16 +78,13 @@ function App() {
       setIsResulted(false);
     };
 
-
-    // 소수점 
-    if (value === ".") {
+    const handleDecimal = () => {
       if (isResulted) {
         setInput("0.");
         setExpression("0.");
         setIsResulted(false);
         return;
-      }
-
+    }
 
       //split / 정규표현식 딥다이브 확인하기
       //정규표현식 쓸떄는 주석 쓰는 게 좋음음
