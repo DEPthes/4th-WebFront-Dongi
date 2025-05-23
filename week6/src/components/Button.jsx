@@ -24,3 +24,8 @@ export function EqualButton({value, onClick}){
         <button onClick={() => onClick(value)} className="btn-equal">{value}</button>
     );
 }
+
+
+
+//괄호에 type추가해서
+//컴포넌트는 작게 작게 나누면 됨

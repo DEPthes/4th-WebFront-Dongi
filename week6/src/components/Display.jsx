@@ -12,3 +12,5 @@ function Display({value,expression}){
 }
 
 export default Display;
+
+//과제에 대한 설명 못하면 패널티!
