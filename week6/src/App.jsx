@@ -110,8 +110,15 @@ function App() {
         }
         return prev + value;
       });
+
     };
     
+const buttonPanel = (value) => {
+  if(Number.isInteger(Number(value))) return <NumButton key={value} value={value} onClick={handleClick}/>;
+  if(operators.includes(value)) return <OperatorButton key={value} value={value} onClick={handleClick}/>;
+  if(value === "=") return  <EqualButton key={value} value={value} onClick={handleClick}/>;
+  return <ControlButton key={value} value={value} onClick={handleClick}/>;
+  };
 
   return (
     <div className='container'>
@@ -120,23 +127,8 @@ function App() {
         <EqualButton value="=" onClick={handleClick}/>
       </div>
       <div className="button-grid">
-          {/* <NumButton value="7" onClick={handleClick}/>
-          <NumButton value="8" onClick={handleClick}/>
-          <NumButton value="9" onClick={handleClick}/>
-          <OperatorButton value="%" onClick={handleClick}/>
-          <NumButton value="4" onClick={handleClick}/>
-          <NumButton value="5" onClick={handleClick}/>
-          <NumButton value="6" onClick={handleClick}/>
-          <OperatorButton value="x" onClick={handleClick}/>
-          <NumButton value="1" onClick={handleClick}/>
-          <NumButton value="2" onClick={handleClick}/>
-          <NumButton value="3" onClick={handleClick}/>
-          <OperatorButton value="-" onClick={handleClick}/>
-          <NumButton value="0" onClick={handleClick}/>   
-          <ControlButton value="." onClick={handleClick}/>   
-          <ControlButton value="CA" onClick={handleClick}/>
-          <OperatorButton value="+" onClick={handleClick}/> */}
-        </div>
+        {buttonList.map(buttonPanel)}
+      </div>
     </div>
   );
 }
