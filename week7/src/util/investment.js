@@ -1,3 +1,5 @@
+//투자 결과 계산 함수 제공
+
 // This function expects a JS object as an argument
 // The object should contain the following properties
 // - initialInvestment: The initial investment amount
