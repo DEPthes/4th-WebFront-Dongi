@@ -3,15 +3,12 @@ import buttonList from './datas/buttonList';
 import Display from './components/Display';
 import calculate from './utills/calculate';
 import { useState } from 'react';
-
-
 //함수로 따로 관리.
 //if문 안에 if문 안됨.
 //split 정규 표현식 쓸 떄 주석 달기
 //useRef로 input 관리.
 //setInput() 는 간단할 수록 좋음. 함수 안에 함수 쓰면 안된다고.
 //map으로. 그리고 data로
-
 
 function App() {
   const [expression, setExpression] = useState("0");
@@ -24,11 +21,14 @@ function App() {
   const operators = ["+", "-", "x", "%"];
 
   const updateInput = (value) => {
-      const lastchar = prev.slice(-1);
-      if(prev === "0") return value;
-      if(lastchar === ".") return prev + value;
-      if(isOperatorClicked || isResulted) return value;
-
+      const lastchar = input.slice(-1);
+      if(input === "0"||isOperatorClicked || isResulted) {
+        setInput(value);
+        return;
+      }
+      if(lastchar === ".") {
+        setInput(input + value);
+      }
       setInput((prev) => prev + value);
   };
 
