@@ -10,7 +10,7 @@ import { useState } from 'react';
 //split 정규 표현식 쓸 떄 주석 달기
 //useRef로 input 관리.
 //setInput() 는 간단할 수록 좋음. 함수 안에 함수 쓰면 안된다고.
-//map으로. 그리고 data로.
+//map으로. 그리고 data로
 
 
 function App() {
@@ -42,15 +42,13 @@ function App() {
     });
   };
 
-
-
   const handleClick = (value) => {  
     if (operators.includes(value)) return handleOperator(value);
     if (value === "=") return handleEqual();
     if (value === "CA") return handleClear();
     if (value === ".") return handleDecimal(value);
-    
-    };
+    return handleNumber(value);
+        };
 
     const handleOperator = (value) => {
       setPrev(input);
@@ -97,34 +95,29 @@ function App() {
       setExpression((prev) => prev + value);           
     };
 
-
-
-    if (isResulted) {
-      setInput(value);
-      setExpression(input + value);
-      setIsResulted(false);
-      setIsOperatorClicked(false);
-      return;
-    }
-
-    // 숫자 처리
-    setIsResulted(false);
-    updateInput(value);
-    setExpression((prev) => {
-      const lastChar = prev.slice(-1);
+    const handleNumber = (value) => {
       if (isResulted) {
+        setInput(value);
+        setExpression(input + value);
         setIsResulted(false);
-        return prev + oper + value;
-      }
-      if (prev === "0") return value;
-      if (lastChar === ".") return prev + value;
-      if (isOperatorClicked) {
         setIsOperatorClicked(false);
-        return prev + value;
+        return;
       }
-      return prev + value;
-    });
-  };
+          
+      setIsResulted(false);
+      updateInput(value);
+      setExpression((prev) => {
+        const lastChar = prev.slice(-1);
+        if (prev === "0") return value;
+        if (lastChar === ".") return prev + value;
+        if (isOperatorClicked) {
+          setIsOperatorClicked(false);
+          return prev + value;
+        }
+        return prev + value;
+      });
+    };
+    
 
   return (
     <div className='container'>
