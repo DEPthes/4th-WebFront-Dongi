@@ -32,6 +32,7 @@ export function calculateInvestmentResults({
 // The browser-provided Intl API is used to prepare a formatter object
 // This object offers a "format()" method that can be used to format numbers as currency
 // Example Usage: formatter.format(1000) => yields "$1,000"
+// 숫자 포맷해서 더 예쁘게
 export const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
