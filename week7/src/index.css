@@ -54,7 +54,8 @@ body {
   text-transform: uppercase;
 }
 
-#user-input input {
+#user-input input,
+#user-input button {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #76c0ae;
@@ -62,6 +63,11 @@ body {
   background-color: transparent;
   color: #c2e9e0;
   font-size: 1rem;
+}
+
+#user-input .btn-reset {
+  background: white;
+  color: #307e6c;
 }
 
 #result {

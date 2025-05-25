@@ -49,9 +49,10 @@ export default function UserInput({ onChange, userInput, onReset }) {
             }
             /> 
         </p>
-        <div>
-          <button onClick={onReset}>Reset</button>
-      </div>      
+        <p>
+          <label>&nbsp;</label>
+          <button className="btn-reset" onClick={onReset}>Reset</button>
+        </p>      
       </div>  
     </section>
   );
