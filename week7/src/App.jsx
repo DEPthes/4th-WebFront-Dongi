@@ -14,7 +14,7 @@ function App() {
     setUserInput((prevUserInput) => {
       return {
         ...prevUserInput,
-        [inputIdentifier]: newValue,
+        [inputIdentifier]: +newValue, //문자열 값 숫자값으로 변환
       };
     })
   }

@@ -1,7 +1,6 @@
 //사용자의 입력 조각 가져옴
 //초기 투자 금액, 연간 투자금, 예상 수익률, 투자 기간 입력 
 
-
 export default function UserInput({ onChange, userInput }) {
   return (
     <section id="user-input">
