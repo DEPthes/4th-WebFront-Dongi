@@ -5,7 +5,7 @@
     duration: 10,
   };
 
-  export const DEFALUT_GOAL_INPUT = {
+  export const DEFAULT_GOAL_INPUT = {
     initialInvestment: 10000,
     annualInvestment: 1200,
     expectedReturn: 6,

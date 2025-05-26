@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import Header from './components/Header';
-import { DEFAULT_USER_INPUT, DEFALUT_GOAL_INPUT } from './constants/defaultInput';
+import { DEFAULT_USER_INPUT, DEFAULT_GOAL_INPUT } from './constants/defaultInput';
 import Tab from './components/Tab';
 import StandardCalculator from './components/standardCalculator';
 import GoalCalculator from './components/GoalCalculator';
 
-
+//초기값이 안뜸(목표 계산기.)
+//연산 로직 넣어야함.
+//tab css 수정
+//추가 확장할 기능 찾아보기
 function App() {
   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);  
-  const [goalInput, setGoalInput] = useState(DEFALUT_GOAL_INPUT);
+  const [goalInput, setGoalInput] = useState(DEFAULT_GOAL_INPUT);
   const [tab, setTab] = useState("standard");
-
 
   function handleChange(inputIdentifier, newValue) {
     setUserInput((prevUserInput) => {
@@ -28,7 +30,7 @@ function App() {
   }
   const handleReset = () => {
     setUserInput(DEFAULT_USER_INPUT);
-    setGoalInput(DEFALUT_GOAL_INPUT);
+    setGoalInput(DEFAULT_GOAL_INPUT);
   }
   const handleTab = (tabName) => setTab(tabName);
 
@@ -36,9 +38,9 @@ function App() {
   return (
     <>
       <Header />
-      <Tab onClick={handleTab} />
+      <Tab onClick={handleTab} /> {/*props로 onClick 함수*/}
       {tab=== "standard" && <StandardCalculator userInput={userInput} onChange={handleChange} onReset={handleReset} />}
-      {tab ==="goal" && <GoalCalculator userInput={goalInput} onChange={handleChange} onReset={handleReset} />}
+      {tab ==="goal" && <GoalCalculator goalInput={goalInput} onChange={handleChange} onReset={handleReset} />}
     </>
   )
 }

@@ -1,9 +1,11 @@
 import GoalInput from "./GoalInput";
+import GoalResults from "./GoalResult";
 
-export default function GoalCalculator(userInput,onChange,onReset){
+export default function GoalCalculator({goalInput,onChange,onReset}){
   return(
     <>
-      <GoalInput userInput={userInput} onChange={onChange} onReset={onReset} />
+      <GoalInput goalInput={goalInput} onChange={onChange} onReset={onReset} />
+      <GoalResults goalInput={goalInput}/>
     </>
     );
 }
