@@ -5,9 +5,7 @@ import Tab from './components/Tab';
 import StandardCalculator from './components/standardCalculator';
 import GoalCalculator from './components/GoalCalculator';
 
-//초기값이 안뜸(목표 계산기.)
-//연산 로직 넣어야함.
-//tab css 수정
+//tab, css 수정
 //추가 확장할 기능 찾아보기
 function App() {
   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);  
