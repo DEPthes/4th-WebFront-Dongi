@@ -68,6 +68,7 @@ body {
 #user-input .btn-reset {
   background: white;
   color: #307e6c;
+  border: none;
 }
 
 #result {

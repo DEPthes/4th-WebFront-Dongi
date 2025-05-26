@@ -1,0 +1,14 @@
+.tabs{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.tabs button {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    color:#307e6c;
+    border: none;
+    cursor: pointer;
+}
+

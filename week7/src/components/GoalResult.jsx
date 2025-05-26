@@ -9,7 +9,7 @@ export default function GoalResults({goalInput}){
 
   return(
     <>  
-      <p className="center">It will take approximately {resultsData.years} year(s) to reach your target amount.</p>  
+      <p className="center">It will take approximately <strong>{resultsData.years}</strong> year(s) to reach your target amount.</p>  
       <table id="result">
         <thead>
           <tr>
