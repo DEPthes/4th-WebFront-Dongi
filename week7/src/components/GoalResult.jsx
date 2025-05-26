@@ -1,15 +1,15 @@
-import { calculateGoalResults} from "../util/calculateGoalDuration"
+import { calculateGoalResults,formatter} from "../util/calculateGoalDuration"
 
 export default function GoalResults({goalInput}){
   const resultsData = calculateGoalResults(goalInput);
-    // const initialInvestment = 
-    // resultsData[0].valueEndOfYear - 
-    // resultsData[0].interest - 
-    // resultsData[0].annualInvestment;
+    const initialInvestment = 
+    resultsData.annualData[0].valueEndOfYear - 
+    resultsData.annualData[0].interest - 
+    resultsData.annualData[0].annualInvestment;
      
   return(
     <table id="result">
-    <div>It will take approximately {resultsData} year(s) to reach your target amount.</div>  
+    <div>It will take approximately {resultsData.years} year(s) to reach your target amount.</div>  
     <thead>
       <tr>
         <th>Year</th>
@@ -20,7 +20,7 @@ export default function GoalResults({goalInput}){
       </tr>
     </thead>
     <tbody>
-      {/* {resultsData.map(yearData => {
+      {resultsData.annualData.map(yearData => {
         const totalInterest = 
           yearData.valueEndOfYear -  
           yearData.annualInvestment * 
@@ -37,7 +37,7 @@ export default function GoalResults({goalInput}){
             <td>{formatter.format(totalAmountInvested)}</td>
           </tr>
             );
-        })} */}
+        })}
     </tbody>
     </table>
     )
