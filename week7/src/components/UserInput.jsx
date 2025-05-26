@@ -1,7 +1,7 @@
 //사용자의 입력 조각 가져옴
 //초기 투자 금액, 연간 투자금, 예상 수익률, 투자 기간 입력 
 
-export default function UserInput({ onChange, userInput, onReset }) {
+export default function UserInput({ stdChange, userInput, onReset }) {
   return (
     <section id="user-input">
       <div className="input-group">
@@ -12,7 +12,7 @@ export default function UserInput({ onChange, userInput, onReset }) {
             required   /*빈입력방지*/
             value={userInput.initialInvestment}
             onChange={(event) =>
-              onChange('initialInvestment', event.target.value)
+              stdChange('initialInvestment', event.target.value)
             }
             /> 
         </p>
@@ -23,7 +23,7 @@ export default function UserInput({ onChange, userInput, onReset }) {
             required
             value={userInput.annualInvestment}
             onChange={(event) =>
-              onChange('annualInvestment', event.target.value)
+              stdChange('annualInvestment', event.target.value)
             }
             /> 
         </p> 
@@ -34,7 +34,7 @@ export default function UserInput({ onChange, userInput, onReset }) {
             required
             value={userInput.expectedReturn}
             onChange={(event) =>
-              onChange('expectedReturn', event.target.value)
+              stdChange('expectedReturn', event.target.value)
             }
             /> 
         </p>
@@ -45,7 +45,7 @@ export default function UserInput({ onChange, userInput, onReset }) {
             required
             value={userInput.duration}
             onChange={(event) =>
-              onChange('duration', event.target.value)
+              stdChange('duration', event.target.value)
             }
             /> 
         </p>

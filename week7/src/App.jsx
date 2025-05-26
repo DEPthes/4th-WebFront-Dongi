@@ -12,14 +12,16 @@ function App() {
   const [goalInput, setGoalInput] = useState(DEFAULT_GOAL_INPUT);
   const [tab, setTab] = useState("standard");
 
-  function handleChange(inputIdentifier, newValue) {
+  function handleStandardChange(inputIdentifier, newValue) {
     setUserInput((prevUserInput) => {
       return {
         ...prevUserInput,
         [inputIdentifier]: +newValue, //문자열 값 숫자값으로 변환
       };
     })
-    setGoalInput((prevGoalInput) => {
+  }
+  function handleGoalChange(inputIdentifier, newValue){
+        setGoalInput((prevGoalInput) => {
         return {
         ...prevGoalInput,
         [inputIdentifier]: +newValue, //문자열 값 숫자값으로 변환
@@ -37,8 +39,8 @@ function App() {
     <>
       <Header />
       <Tab onClick={handleTab} /> {/*props로 onClick 함수*/}
-      {tab=== "standard" && <StandardCalculator userInput={userInput} onChange={handleChange} onReset={handleReset} />}
-      {tab ==="goal" && <GoalCalculator goalInput={goalInput} onChange={handleChange} onReset={handleReset} />}
+      {tab=== "standard" && <StandardCalculator userInput={userInput} stdChange={handleStandardChange} onReset={handleReset} />}
+      {tab ==="goal" && <GoalCalculator goalInput={goalInput} goalChange={handleGoalChange} onReset={handleReset} />}
     </>
   )
 }

@@ -1,7 +1,7 @@
 //투자목표달성 계산기
 //초기투자금,연간적립금액, 기대 수익률, 목표금액 -> 기간
 
-export default function GoalInput({goalInput, onChange, onReset}){
+export default function GoalInput({goalInput, goalChange, onReset}){
   return(
     <section id="user-input">
       <div className="input-group">
@@ -12,7 +12,7 @@ export default function GoalInput({goalInput, onChange, onReset}){
             required   
             value={goalInput.initialInvestment}
             onChange={(event) =>
-              onChange('initialInvestment', event.target.value)
+              goalChange('initialInvestment', event.target.value)
             }
             /> 
         </p>
@@ -23,7 +23,7 @@ export default function GoalInput({goalInput, onChange, onReset}){
             required
             value={goalInput.annualInvestment}
             onChange={(event) =>
-              onChange('annualInvestment', event.target.value)
+              goalChange('annualInvestment', event.target.value)
             }
             /> 
         </p> 
@@ -34,7 +34,7 @@ export default function GoalInput({goalInput, onChange, onReset}){
             required
             value={goalInput.expectedReturn}
             onChange={(event) =>
-              onChange('expectedReturn', event.target.value)
+              goalChange('expectedReturn', event.target.value)
             }
             /> 
         </p>
@@ -45,7 +45,7 @@ export default function GoalInput({goalInput, onChange, onReset}){
             required
             value={goalInput.targetAmount}
             onChange={(event) =>
-              onChange('targetAmount', event.target.value)
+              goalChange('targetAmount', event.target.value)
             }
             /> 
         </p>
