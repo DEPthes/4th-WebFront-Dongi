@@ -5,8 +5,8 @@ import Tab from './components/Tab';
 import StandardCalculator from './components/standardCalculator';
 import GoalCalculator from './components/GoalCalculator';
 
-//tab, css 수정
 //추가 확장할 기능 찾아보기
+//리팩토링 goal 숫자 변경 안됨, reset버튼 수정해야함함
 function App() {
   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);  
   const [goalInput, setGoalInput] = useState(DEFAULT_GOAL_INPUT);
@@ -34,7 +34,6 @@ function App() {
   }
   const handleTab = (tabName) => setTab(tabName);
 
-  
   return (
     <>
       <Header />
