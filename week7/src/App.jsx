@@ -6,7 +6,7 @@ import StandardCalculator from './components/standardCalculator';
 import GoalCalculator from './components/GoalCalculator';
 
 //추가 확장할 기능 찾아보기
-//리팩토링 goal 숫자 변경 안됨, reset버튼 수정해야함함
+//reset버튼 수정해야함
 function App() {
   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);  
   const [goalInput, setGoalInput] = useState(DEFAULT_GOAL_INPUT);

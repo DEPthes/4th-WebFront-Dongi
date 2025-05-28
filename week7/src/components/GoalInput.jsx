@@ -12,11 +12,13 @@ const goalFields = [
 export default function GoalInput({ goalInput, goalChange, onReset }){
   return (
     <section id="user-input">
-      <InputGroup fields={goalFields} goalInputs={goalInput} goalChange={goalChange}/>
-      <p>
-        <label>&nbsp;</label>
-        <button className="btn-reset" onClick={onReset}>Reset</button>
-      </p> 
+      <div className="input-group">
+        <InputGroup fields={goalFields} goalInputs={goalInput} goalChange={goalChange}/>
+        <p>
+          <label>&nbsp;</label>
+          <button className="btn-reset" onClick={onReset}>Reset</button>
+        </p>
+      </div> 
     </section>
   )  
 }
