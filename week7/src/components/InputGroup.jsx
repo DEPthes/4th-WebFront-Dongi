@@ -16,15 +16,4 @@ export default function InputGroup({fields, goalInputs, goalChange}){
     </div>
   );
 }
-
-      {/* <p>
-        <label>Initial Investment</label>
-          <input 
-            type="number" 
-            required   
-            value={goalInput.initialInvestment}
-            onChange={(event) =>
-            goalChange('initialInvestment', event.target.value)
-            }
-            />        
-      </p> */}
+//필드명만 다르고 반복 구조라 정보는 배열로 분리하고 map() 이용해서 필드 수만큼 반복

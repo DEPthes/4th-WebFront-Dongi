@@ -1,14 +1,14 @@
-import { calculateGoalResults,formatter} from "../util/calculateGoalDuration"
+import { calculateGoalResults, formatter } from "../util/calculateGoalDuration"
 
 export default function GoalResults({goalInput}){
   const resultsData = calculateGoalResults(goalInput);
     const initialInvestment = 
     resultsData.annualData[0].valueEndOfYear - 
     resultsData.annualData[0].interest - 
-    resultsData.annualData[0].annualInvestment;
+    resultsData.annualData[0].annualInvestment; 
 
   return(
-    <>  
+    <>   {/*하나의 값만 리턴 */}
       <p className="center">It will take approximately <strong>{resultsData.years}</strong> year(s) to reach your target amount.</p>  
       <table id="result">
         <thead>

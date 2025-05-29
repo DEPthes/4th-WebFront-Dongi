@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import Header from './components/Header';
 import { DEFAULT_USER_INPUT, DEFAULT_GOAL_INPUT } from './constants/defaultInput';
-import Tab from './components/Tab';
 import StandardCalculator from './components/standardCalculator';
 import GoalCalculator from './components/GoalCalculator';
+import Header from './components/Header';
+import Tab from './components/Tab';
+import { useState } from 'react';
 
 //추가 확장할 기능 찾아보기
-//reset버튼 수정해야함
 function App() {
   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);  
   const [goalInput, setGoalInput] = useState(DEFAULT_GOAL_INPUT);
