@@ -37,8 +37,8 @@ function App() {
     <>
       <Header />
       <Tab onClick={handleTab} /> {/*props로 onClick 함수*/}
-      {tab=== "standard" && <StandardCalculator userInput={userInput} stdChange={handleStandardChange} onReset={handleReset} />}
-      {tab ==="goal" && <GoalCalculator goalInput={goalInput} goalChange={handleGoalChange} onReset={handleReset} />}
+      {tab=== "standard" && <StandardCalculator tab={tab} userInput={userInput} stdChange={handleStandardChange} onReset={handleReset} />}
+      {tab ==="goal" && <GoalCalculator tab={tab} goalInput={goalInput} goalChange={handleGoalChange} onReset={handleReset} />}
     </>
   )
 }

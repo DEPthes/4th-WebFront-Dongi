@@ -1,54 +1,20 @@
 //사용자의 입력 조각 가져옴
 //초기 투자 금액, 연간 투자금, 예상 수익률, 투자 기간 입력 
+import InputGroup from "./InputGroup";
 
-export default function UserInput({ stdChange, userInput, onReset }) {
+const stdFields = [
+  { name: "initialInvestment", label: "Initial Investment"},
+  { name: "annualInvestment", label: "Annual Investment"},
+  { name: "expectedReturn", label: "Expected Return"},
+  { name: "duration", label: "Duration"}
+];
+
+
+export default function UserInput({ tab, stdChange, userInput, onReset }) {
   return (
     <section id="user-input">
       <div className="input-group">
-        <p>
-          <label>Initial Investment</label>
-          <input 
-            type="number" 
-            required   /*빈입력방지*/
-            value={userInput.initialInvestment}
-            onChange={(event) =>
-              stdChange('initialInvestment', event.target.value)
-            }
-            /> 
-        </p>
-        <p>
-          <label>Annual Investment</label>
-          <input 
-            type="number" 
-            required
-            value={userInput.annualInvestment}
-            onChange={(event) =>
-              stdChange('annualInvestment', event.target.value)
-            }
-            /> 
-        </p> 
-        <p>
-          <label>Expected Return</label>
-          <input 
-            type="number" 
-            required
-            value={userInput.expectedReturn}
-            onChange={(event) =>
-              stdChange('expectedReturn', event.target.value)
-            }
-            /> 
-        </p>
-        <p>
-          <label>Duration</label>
-          <input 
-            type="number" 
-            required
-            value={userInput.duration}
-            onChange={(event) =>
-              stdChange('duration', event.target.value)
-            }
-            /> 
-        </p>
+        <InputGroup tab={tab} userInputs={userInput} stdChange={stdChange} fields={stdFields}/>
         <p>
           <label>&nbsp;</label>
           <button className="btn-reset" onClick={onReset}>Reset</button>

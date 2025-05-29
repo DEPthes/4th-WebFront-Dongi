@@ -9,11 +9,11 @@ const goalFields = [
   {name: "targetAmount", label: "Target Amount"}
 ];
 
-export default function GoalInput({ goalInput, goalChange, onReset }){
+export default function GoalInput({ tab, goalInput, goalChange, onReset }){
   return (
     <section id="user-input">
       <div className="input-group">
-        <InputGroup fields={goalFields} goalInputs={goalInput} goalChange={goalChange}/>
+        <InputGroup fields={goalFields} goalInputs={goalInput} goalChange={goalChange} tab={tab}/>
         <p>
           <label>&nbsp;</label>
           <button className="btn-reset" onClick={onReset}>Reset</button>
