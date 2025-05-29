@@ -5,7 +5,6 @@ import Header from './components/Header';
 import Tab from './components/Tab';
 import { useState } from 'react';
 
-//추가 확장할 기능 찾아보기
 function App() {
   const [userInput, setUserInput] = useState(DEFAULT_USER_INPUT);  
   const [goalInput, setGoalInput] = useState(DEFAULT_GOAL_INPUT);
@@ -23,7 +22,7 @@ function App() {
         setGoalInput((prevGoalInput) => {
         return {
         ...prevGoalInput,
-        [inputIdentifier]: +newValue, //문자열 값 숫자값으로 변환
+        [inputIdentifier]: +newValue, 
       };
       })
   }
@@ -36,7 +35,7 @@ function App() {
   return (
     <>
       <Header />
-      <Tab onClick={handleTab} /> {/*props로 onClick 함수*/}
+      <Tab onClick={handleTab} /> 
       {tab=== "standard" && <StandardCalculator tab={tab} userInput={userInput} stdChange={handleStandardChange} onReset={handleReset} />}
       {tab ==="goal" && <GoalCalculator tab={tab} goalInput={goalInput} goalChange={handleGoalChange} onReset={handleReset} />}
     </>

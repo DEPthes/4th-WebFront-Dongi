@@ -19,15 +19,14 @@ export function calculateGoalResults({
       interest: interest,
       valueEndOfYear: currentValue,
       annualInvestment: annualInvestment
-   });
-
+    });
   }
   return{
     years,
     annualData
   };
 }
-
+//숫자를 미국식 달러 통화 형식(예: $1,000)으로 변환
 export const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",

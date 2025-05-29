@@ -9,12 +9,11 @@ const stdFields = [
   { name: "duration", label: "Duration"}
 ];
 
-
 export default function UserInput({ tab, stdChange, userInput, onReset }) {
   return (
     <section id="user-input">
       <div className="input-group">
-        <InputGroup tab={tab} userInputs={userInput} stdChange={stdChange} fields={stdFields}/>
+        <InputGroup tab={tab} userInputs={userInput} stdChange={stdChange} fields={stdFields} />
         <p>
           <label>&nbsp;</label>
           <button className="btn-reset" onClick={onReset}>Reset</button>

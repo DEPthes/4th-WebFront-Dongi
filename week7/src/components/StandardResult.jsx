@@ -7,7 +7,6 @@ export default function StdResults({ input }) {
     resultsData[0].interest - 
     resultsData[0].annualInvestment;
 
-  
   return (
     <table id="result">
       <thead>

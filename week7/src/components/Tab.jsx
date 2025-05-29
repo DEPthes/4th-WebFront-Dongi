@@ -1,4 +1,4 @@
-export default function Tab({ onClick }){
+export default function Tab({ onClick }) {
   return(
       <div className="tabs">
         <button className="tab-standard" onClick={() => onClick("standard")}>Standard calculator</button>

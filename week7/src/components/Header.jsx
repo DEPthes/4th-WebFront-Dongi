@@ -1,5 +1,5 @@
 import logo from '../assets/investment-calculator-logo.png';
-//로고와 제목 출력
+
 export default function Header(){
   return (
     <header id="header"> 
