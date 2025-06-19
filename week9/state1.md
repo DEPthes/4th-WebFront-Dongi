@@ -1,4 +1,9 @@
-챌린지 1 of 3:CSS 클래스를 추가하고 제거하기
+State를 사용해 Input 다루기
+https://ko.react.dev/learn/reacting-to-input-with-state 기반 실습 정리 1
+
+
+Challenge 1 of 3: CSS 클래스를 추가하고 제거하기
+
 
 import {useState} from 'react';
 
@@ -27,8 +32,7 @@ export default function Picture() {
 }
 
 
-챌린지 2 of 3: 프로필 편집기 
-
+Challenge 2 of 3: 프로필 편집기
 
 import {useState} from 'react';
 export default function EditProfile() {
@@ -73,7 +77,8 @@ export default function EditProfile() {
 
 
 
-챌린지 3 of 3: 명령형 코드를 React 없이 리팩토링하기
+Challenge 3 of 3: 명령형 코드를 React 없이 리팩토링하기
+
 let firstName = 'Jane';
 let lastName = 'Jacobs';
 let isEditing = false;

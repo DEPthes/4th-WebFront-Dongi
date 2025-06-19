@@ -1,6 +1,7 @@
-챌린지 1 of 2: 동기화된 입력 
-아래 두 입력은 독립적입니다. 두 입력의 동기화 상태를 유지하세요. 한 입력을 수정하면 다른 입력도 같은 문구로 변경되어야 하며 반대 경우도 동일합니다.
+컴포넌트 간 State 공유하기
+https://ko.react.dev/learn/sharing-state-between-components 기반 실습 정리 3
 
+챌린지 1 of 2: 동기화된 입력 
 
 import { useState } from 'react';
 
@@ -33,12 +34,6 @@ function Input({ label, text, onTextChange }) {
 
 
 챌린지 2 of 2: 목록 필터링하기 
-예시에서 SearchBar는 텍스트 입력을 제어하는 자체 query state를 가집니다. 부모 컴포넌트 FilterableList는 List의 목록을 표시하지만 검색 질의를 고려하지 않습니다.
-
-검색 질의에 따라 목록을 필터링하도록 filterItems(foods, query) 함수를 사용하세요. 수정한 것을 테스트하려면 검색창에 “s”를 입력했을 때 “Sushi”, “Shish kebab”, “Dim sum”이 목록에 표시되는지 확인하세요.
-
-filterItems은 이미 구현 및 가져오기가 되었으므로 직접 작성할 필요가 없습니다!
-
 
 import { useState } from 'react';
 import { foods, filterItems } from './data.js';
